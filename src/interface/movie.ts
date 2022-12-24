@@ -14,10 +14,8 @@ export interface MovieDetails extends MovieCommons {
   homepage: string;
   imdb_id: string;
   original_title: string;
-  popularity: number;
-  poster_path: string;
   production_countries: ProductionCountry[];
-  release_date: Date;
+  release_date: string;
   revenue: number;
   runtime: number;
   spoken_languages: SpokenLanguage[];
@@ -28,11 +26,19 @@ export interface MovieDetails extends MovieCommons {
   videos: {
     results: Video[];
   };
+  genre_ids: number[];
+  first_air_date: string;
+  name: string;
+  origin_countres: string[];
+  original_name: string;
+  popularity: number;
+  poster_path: string;
+  media_type: string;
 }
 
 export interface MovieRow extends MovieCommons {
   genre_ids: number[];
-  first_air_date: Date;
+  first_air_date: string;
   name: string;
   origin_countres: string[];
   original_name: string;
