@@ -1,14 +1,19 @@
-export interface Movie {
-  adult: boolean;
+interface MovieCommons {
+  id: number;
   backdrop_path: string;
+  vote_average: number;
+  vote_count: number;
+  original_language: string;
+  overview: string;
+}
+
+export interface MovieDetails extends MovieCommons {
+  adult: boolean;
   budget: number;
   genres: Genre[];
   homepage: string;
-  id: number;
   imdb_id: string;
-  original_language: string;
   original_title: string;
-  overview: string;
   popularity: number;
   poster_path: string;
   production_countries: ProductionCountry[];
@@ -20,8 +25,19 @@ export interface Movie {
   tagline: string;
   title: string;
   video: boolean;
-  vote_average: number;
-  vote_count: number;
+  videos: {
+    results: Video[];
+  };
+}
+
+export interface MovieRow extends MovieCommons {
+  genre_ids: number[];
+  first_air_date: Date;
+  name: string;
+  origin_countres: string[];
+  original_name: string;
+  popularity: number;
+  poster_path: string;
 }
 
 type GenreName = "액션" | "스릴러" | "범죄";
@@ -33,11 +49,22 @@ interface Genre {
 
 interface ProductionCountry {
   name: string;
-  [iso: number]: string;
+  [iso: string]: string;
 }
 
 interface SpokenLanguage {
-  [iso: number]: string;
+  [iso: string]: string;
   name: string;
   english_name: string;
+}
+
+interface Video {
+  id: string;
+  key: string;
+  name: string;
+  official: boolean;
+  published_at: string;
+  site: string;
+  size: number;
+  type: string;
 }
