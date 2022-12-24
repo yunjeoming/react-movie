@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import axios from "../api/axios";
 import requests from "../api/request";
-import { Movie } from "../interface/movie";
+import { MovieDetails } from "../interface/movie";
 import "./Banner.css";
 
 const Banner = () => {
-  const [movie, setMovie] = useState<Movie | undefined>(undefined);
+  const [movie, setMovie] = useState<MovieDetails | undefined>(undefined);
+  const [isClicked, setIsClicked] = useState(false);
 
   const fetchData = async () => {
     const request = await axios.get(requests.fetchNowPlaying);
@@ -31,6 +33,22 @@ const Banner = () => {
   };
 
   if (!movie) return null;
+  if (isClicked)
+    return (
+      <Container>
+        <HomeContainer>
+          <Iframe
+            width="300"
+            height="200"
+            src={`https://www.youtube.com/embed/${movie.videos.results[0].key}?controls=0&autoplay=1&loop=1&mute=1&playlist=${movie.videos.results[0].key}`}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="autoplay; fullscreen"
+            allowFullScreen
+          />
+        </HomeContainer>
+      </Container>
+    );
 
   return (
     <header
@@ -44,7 +62,13 @@ const Banner = () => {
       <div className="banner__contents">
         <h1> {movie.title || movie.original_title}</h1>
         <div className="banner__buttons">
-          <button className="banner__button play">Play</button>
+          <button
+            className="banner__button play"
+            onClick={() => setIsClicked(true)}
+            disabled={movie.videos.results.length === 0}
+          >
+            Play
+          </button>
           <button className="banner__button info">More Information</button>
         </div>
         <h1 className="banner__description">{truncate(movie.overview, 100)}</h1>
@@ -55,3 +79,34 @@ const Banner = () => {
 };
 
 export default Banner;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+`;
+
+const HomeContainer = styled.div`
+  width: 100%;
+  height: 100vh;
+`;
+
+const Iframe = styled.iframe`
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+  opacity: 0.65;
+  border: none;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+`;
