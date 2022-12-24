@@ -1,11 +1,16 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { Data } from "../App";
 import axios from "../api/axios";
-import { MovieRow } from "../interface/movie";
+import { MovieDetails } from "../interface/movie";
 import "./Row.css";
+import MovieModal from "./MovieModal";
+import { Data } from "../pages/MainPage";
 
 const Row = ({ title, id, fetchUrl, isLargeRow = false }: Data) => {
-  const [movies, setMovies] = useState<MovieRow[] | undefined>(undefined);
+  const [movies, setMovies] = useState<MovieDetails[] | undefined>(undefined);
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState<MovieDetails | undefined>(
+    undefined
+  );
 
   const fetchMovieData = useCallback(async () => {
     const request = await axios.get(fetchUrl);
@@ -32,6 +37,11 @@ const Row = ({ title, id, fetchUrl, isLargeRow = false }: Data) => {
     }
   };
 
+  const clickMovie = (movie: MovieDetails) => {
+    setOpenModal(true);
+    setSelectedMovie(movie);
+  };
+
   return (
     <section className="row">
       <h2>{title}</h2>
@@ -52,6 +62,7 @@ const Row = ({ title, id, fetchUrl, isLargeRow = false }: Data) => {
                 src={`https://image.tmdb.org/t/p/original/${
                   isLargeRow ? movie.poster_path : movie.backdrop_path
                 }`}
+                onClick={() => clickMovie(movie)}
               />
             ))}
           </div>
@@ -62,6 +73,12 @@ const Row = ({ title, id, fetchUrl, isLargeRow = false }: Data) => {
             <span className="arrow">&gt;</span>
           </div>
         </div>
+      )}
+      {openModal && (
+        <MovieModal
+          movie={selectedMovie}
+          setOpenModal={setOpenModal}
+        />
       )}
     </section>
   );

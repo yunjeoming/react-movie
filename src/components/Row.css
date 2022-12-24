@@ -1,8 +1,9 @@
 .row {
   background-color: rgb(0, 0, 0);
   color: #ffffff;
+  padding: 2rem 0;
 }
-.row h2 {
+.row > h2 {
   padding-left: 1rem;
 }
 .slider {
