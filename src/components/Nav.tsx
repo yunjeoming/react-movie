@@ -26,7 +26,7 @@ const Nav = () => {
       />
       <img
         alt="User logo"
-        src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png"
+        src="https://www.hotelbooqi.com/wp-content/uploads/2021/12/128-1280406_view-user-icon-png-user-circle-icon-png.png"
         className="nav__avatar"
       />
     </nav>
