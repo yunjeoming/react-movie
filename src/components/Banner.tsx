@@ -7,7 +7,10 @@ import "./Banner.css";
 
 const Banner = () => {
   const [movie, setMovie] = useState<MovieDetails | undefined>(undefined);
-  const [isClicked, setIsClicked] = useState(false);
+  const [isClicked, setIsClicked] = useState({
+    play: false,
+    info: false,
+  });
 
   const fetchData = async () => {
     const request = await axios.get(requests.fetchNowPlaying);
@@ -32,8 +35,8 @@ const Banner = () => {
     return str.length > num ? str.slice(0, num - 1) + "..." : str;
   };
 
-  if (!movie) return null;
-  if (isClicked)
+  if (!movie) return <></>;
+  if (isClicked.play)
     return (
       <Container>
         <HomeContainer>
@@ -64,16 +67,24 @@ const Banner = () => {
         <div className="banner__buttons">
           <button
             className="banner__button play"
-            onClick={() => setIsClicked(true)}
+            onClick={() => setIsClicked((prev) => ({ ...prev, play: true }))}
             disabled={movie.videos.results.length === 0}
           >
             Play
           </button>
-          <button className="banner__button info">More Information</button>
+          <button
+            className="banner__button info"
+            onClick={() => setIsClicked((prev) => ({ ...prev, info: true }))}
+          >
+            More Information
+          </button>
         </div>
-        <h1 className="banner__description">{truncate(movie.overview, 100)}</h1>
+        <h1 className="banner__description">
+          {isClicked.info ? movie.overview : truncate(movie.overview, 100)}
+        </h1>
+        {/* <h1 className="banner__description">{truncate(movie.overview, 100)}</h1> */}
       </div>
-      <div className="banner--fadeBottom"></div>
+      <div className="banner__fadeBottom"></div>
     </header>
   );
 };
@@ -87,16 +98,18 @@ const Container = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100vh;
+  background-color: #000000;
 `;
 
 const HomeContainer = styled.div`
   width: 100%;
   height: 100vh;
+  padding: 4rem;
 `;
 
 const Iframe = styled.iframe`
   width: 100%;
-  height: 100vh;
+  height: 90vh;
   z-index: -1;
   opacity: 0.65;
   border: none;

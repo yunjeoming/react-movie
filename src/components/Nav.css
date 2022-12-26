@@ -8,7 +8,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 1;
+  z-index: 100;
   padding: 1.3rem;
   display: flex;
   justify-content: space-between;
@@ -48,4 +48,16 @@
   width: 2rem;
   /* object-fit: contain; */
   cursor: pointer;
+}
+@media (max-width: 48rem) {
+  .nav__input {
+    max-width: 10rem;
+  }
+}
+@media (max-width: 25rem) {
+  .nav__input {
+    max-width: 2rem;
+    padding-right: 0;
+    background-color:transparent;
+  }
 }

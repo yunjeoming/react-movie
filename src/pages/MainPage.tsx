@@ -48,6 +48,7 @@ const rowDatas: Data[] = [
     isLargeRow: false,
   },
 ];
+
 const MainPage = () => {
   return (
     <>

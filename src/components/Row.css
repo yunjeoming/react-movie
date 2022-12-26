@@ -75,7 +75,31 @@
 .row__poster:hover {
   transform: scale(1.08);
 }
+.swiper-slide {
+  padding: 0.5rem;
+}
+.swiper-pagination {
+  text-align: right;
+}
 
-/* .row__poster.row__poster-large:hover {
-  transform: scale(1.1);
-} */
+.swiper-pagination-bullet {
+  background: gray;
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background: white;
+}
+
+.swiper-button-prev {
+  color: white;
+}
+
+.swiper-button-next {
+  color: white;
+}
+
+.swiper-button-next:after, .swiper-button-prev:after{
+  font-size: 1.3rem;
+  font-weight: 600;
+}

@@ -55,7 +55,6 @@ const footerDatas = [
 const Footer = () => {
   return (
     <FooterContainer>
-      <FooterContent>
         <FooterLinkContainer>
           <FooterLinkTitle>넷플릭스 대한민국</FooterLinkTitle>
           <FooterLinkContent>
@@ -70,7 +69,6 @@ const Footer = () => {
             <FooterDescRights>Netflix Rights Reserved.</FooterDescRights>
           </FooterDescContainer>
         </FooterLinkContainer>
-      </FooterContent>
     </FooterContainer>
   );
 };
@@ -90,10 +88,6 @@ const FooterContainer = styled.footer`
   @media (max-width: 48rem) {
     padding: 1.5rem 1.5rem 1.8rem 1.5rem;
   }
-`;
-
-const FooterContent = styled.div`
-  
 `;
 
 const FooterLinkContainer = styled.div`
@@ -123,9 +117,10 @@ const FooterLinkContent = styled.div`
 const FooterLink = styled.a`
   color: gray;
   font-size: 0.8rem;
-  width: 6.8rem;
-  margin-bottom: 1.5rem;
+  width: 8rem;
+  margin-bottom: 1rem;
   text-decoration: none;
+  padding: 0.3rem 0.5rem;
 
   &:hover {
     text-decoration: underline;
