@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename="react-netflix-clone">
+    <BrowserRouter basename="react-movie">
       <App />
     </BrowserRouter>
   </React.StrictMode>
